@@ -351,7 +351,7 @@ namespace SHWXWebSvr
         {
             RetObj obj = new RetObj();
 
-            string sqlUpdateHeadImg = "update Sys_Users set AvatarUrl = @AvatarUrl where GUID = @UserGUID";
+            string sqlUpdateHeadImg = "update Sys_UUUU set AvatarUrl = @AvatarUrl where GUID = @UserGUID";
             SqlParameter[] sp = { new SqlParameter("@AvatarUrl", AvatarUrl),
                                   new SqlParameter("@UserGUID", UserGUID)
             };
@@ -441,7 +441,7 @@ namespace SHWXWebSvr
                 }
                 else //UserID不为空
                 {
-                    if (OpenID != "oVo8K4xWTzD4nH9JcqjR2gm9lYMU" && UserID == "00001")  //限定老板账号只能在老板自己的微信上登录
+                    if (OpenID != "***" && UserID == "***")  //限定老板账号只能在老板自己的微信上登录
                     {
                         obj.errNo = "105";
                         obj.errDesc = "该ERP账号不允许绑定其他微信号！";
@@ -462,12 +462,12 @@ namespace SHWXWebSvr
                         string psw = dt2.Rows[0]["PWAES"].ToString();
                         if (psw == "" || Pswd == "*" + UserID || Pswd == AES.AESDecrypt(psw)) //Pswd正确
                         {
-                            string sqlstr3 = "update Sys_Users set OpenID = '' where OpenID = @OpenID";
+                            string sqlstr3 = "update Sys_UUUU set OpenID = '' where OpenID = @OpenID";
                             SqlParameter[] sp3 = { new SqlParameter("@OpenID", OpenID)
                             };
                             SQLHelper.ExecuteNonQuery(sqlstr3, sp3);
 
-                            string sqlstr4 = "update Sys_Users set OpenID = @OpenID,AvatarUrl = @AvatarUrl where UserID = @UserID";
+                            string sqlstr4 = "update Sys_UUUU set OpenID = @OpenID,AvatarUrl = @AvatarUrl where UserID = @UserID";
                             SqlParameter[] sp4 = { new SqlParameter("@OpenID", OpenID),
                                                     new SqlParameter("@AvatarUrl", AvatarUrl),
                                                     new SqlParameter("@UserID", UserID)
@@ -1650,7 +1650,7 @@ namespace SHWXWebSvr
                 return FormatRet(obj);
             }
 
-            string sqlstr = "update Sys_Users set FormID=@FormID,FormTime=@FormTime where GUID =@GUID";
+            string sqlstr = "update Sys_UUUU set FormID=@FormID,FormTime=@FormTime where GUID =@GUID";
             DateTime nFormTime = DateTime.Now.AddDays(7);//存入过期时间
             SqlParameter[] sp = { new SqlParameter("@FormID", form_id),
                                   new SqlParameter("@FormTime", nFormTime.ToString()),
@@ -1698,7 +1698,7 @@ namespace SHWXWebSvr
                 return FormatRet(obj);
             }
 
-            string sqlstr = "select IsPostMsg from Sys_Users where GUID =@GUID";
+            string sqlstr = "select IsPostMsg from Sys_UUUU where GUID =@GUID";
             SqlParameter[] sp = { new SqlParameter("@GUID", guid)
             };
 
@@ -1749,7 +1749,7 @@ namespace SHWXWebSvr
                 return FormatRet(obj);
             }
 
-            string sqlstr = "update Sys_Users set IsPostMsg=@IsPostMsg where GUID =@GUID";
+            string sqlstr = "update Sys_UUUU set IsPostMsg=@IsPostMsg where GUID =@GUID";
             SqlParameter[] sp = { new SqlParameter("@IsPostMsg", IsPostMsg),
                                   new SqlParameter("@GUID", guid)
             };
@@ -2108,7 +2108,7 @@ namespace SHWXWebSvr
                 return FormatRet(obj);
             }
 
-            string Sqlstr = " select b.GUID,a.BeginTime,a.EndTime,b.MeetTitle,m.MtName,u.UserName from [dbo].[AM_MeetApply] a,[dbo].[AM_MeetCard] b left join [dbo].[Sys_Users]"
+            string Sqlstr = " select b.GUID,a.BeginTime,a.EndTime,b.MeetTitle,m.MtName,u.UserName from [dbo].[AM_MeetApply] a,[dbo].[AM_MeetCard] b left join [dbo].[Sys_UUUU]"
                 +" u on b.LeadingMan=u.GUID,[dbo].[AM_MeetRoom] m where b.MGUID=a.GUID and m.GUID=a.MeetRoom and CONVERT(varchar,a.MeetDate,120) like '%" + MeetDate + "%'";
             SqlParameter[] sp = {  };
             DataTable dt = SQLHelper.ExecuteDataTable(Sqlstr, sp);

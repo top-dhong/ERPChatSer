@@ -27,8 +27,8 @@ namespace SHWXWebSvr
     // [System.Web.Script.Services.ScriptService]
     public class SHWXSvr : System.Web.Services.WebService
     {
-        private const string cAppID = "wx85dc93f0397bce3a";
-        private const string cAppSecret = "b7d5260272fe62d2c2acd1569ca994d7";
+        private const string cAppID = "****";
+        private const string cAppSecret = "****";
 
         public class FormData
         {
